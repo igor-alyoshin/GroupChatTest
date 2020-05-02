@@ -3,14 +3,16 @@ package com.ai.groupchattest
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
+import android.util.SparseArray
 import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
+import androidx.core.util.contains
 
 
 class GroupChatView(context: Context, attrs: AttributeSet? = null) : FrameLayout(context, attrs) {
 
-    private val participants = HashMap<Int, Participant>()
+    private val participants = SparseArray<Participant>()
     private var self: Participant? = null
 
     private var itemWidth: Int
@@ -29,8 +31,8 @@ class GroupChatView(context: Context, attrs: AttributeSet? = null) : FrameLayout
 
     fun addParticipant(id: Int, x: Int, y: Int, isSelf: Boolean = false): ParticipantTextureView? {
         val participant = Participant(id, x, y)
-        if (!participants.containsKey(id)) {
-            participants[id] = participant
+        if (!participants.contains(id)) {
+            participants.put(id, participant)
             if (isSelf) self = participant
             val roundedParent = RoundedFrameLayout(context)
             roundedParent.tag = participant

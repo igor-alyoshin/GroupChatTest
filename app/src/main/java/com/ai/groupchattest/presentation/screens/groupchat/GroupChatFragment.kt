@@ -7,33 +7,33 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.ai.groupchattest.GroupChatView
 import com.ai.groupchattest.R
-import com.ai.groupchattest.databinding.GroupChatFragmentBinding
-import com.ai.groupchattest.presentation.common.BaseFragment
 import com.ai.groupchattest.presentation.utils.getUriFromRaw
 import com.ai.groupchattest.presentation.utils.showToast
 import com.ai.groupchattest.presentation.utils.withNotNull
+import kotlinx.android.synthetic.main.group_chat_fragment.view.*
 import me.aflak.ezcam.EZCam
 import kotlin.random.Random
 
 
-class GroupChatFragment : BaseFragment<GroupChatFragmentBinding>() {
+class GroupChatFragment : Fragment() {
 
     private var camera: EZCam? = null
 
-    override fun bind(inflater: LayoutInflater, container: ViewGroup?): GroupChatFragmentBinding {
-        return GroupChatFragmentBinding.inflate(inflater, container, false)
+    override fun onCreateView(inflater: LayoutInflater, parent: ViewGroup?, state: Bundle?): View? {
+        return inflater.inflate(R.layout.group_chat_fragment, parent, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        withNotNull(binding) {
+        with(view) {
             var idCounter = 0
-            groupChat.addSelfUser(idCounter++)
+            group_chat.addSelfUser(idCounter++)
             val random = Random(System.currentTimeMillis())
-            addParticipant.setOnClickListener {
-                groupChat.addNewRandomUser(random, idCounter++)
+            add_participant.setOnClickListener {
+                group_chat.addNewRandomUser(random, idCounter++)
                 context?.showToast(idCounter.toString())
             }
         }
