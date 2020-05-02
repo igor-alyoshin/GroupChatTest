@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GroupChatTest</string>
+    <string name="start">Start</string>
+    <string name="permission_not_enabled_description">Please enable the required permissions</string>
+    <string name="warning">Warning</string>
+    <string name="add_participant">Add participant</string>
+</resources>

@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 29
+
+
+    defaultConfig {
+        applicationId "com.ai.groupchattest"
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation project(":library")
+
+    implementation "androidx.core:core-ktx:1.2.0"
+    implementation "androidx.appcompat:appcompat:1.1.0"
+    implementation "androidx.constraintlayout:constraintlayout:1.1.3"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    //Lifecycle
+    def lifecycle_version = "2.2.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+
+    //Navigation
+    def navigation_version = "2.2.2"
+    implementation "androidx.navigation:navigation-fragment:$navigation_version"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
+
+    //Dexter
+    implementation 'com.karumi:dexter:6.0.2'
+
+    //EzCam
+    implementation 'me.aflak.libraries:ezcam:2.3.3'
+}
